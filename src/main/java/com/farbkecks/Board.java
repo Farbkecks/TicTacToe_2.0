@@ -69,6 +69,9 @@ public class Board {
     private int userInput(Player player) {
         var input = -1;
         do {
+            System.out.print("Spieler ");
+            System.out.print(player);
+            System.out.println(" ist dran");
             System.out.println("An welche Position soll das Zeichen? ");
             if (scanner.hasNextInt()) {
                 input = scanner.nextInt();
