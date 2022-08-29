@@ -5,40 +5,47 @@ import java.util.Scanner;
 
 public class Board {
 
-    Player[] board;
+    Player[] list;
     final static Scanner scanner = new Scanner(System.in);
 
     public Board() {
-        this.board = new Player[9];
-        Arrays.fill(board, Player.NULL);
+        this.list = new Player[9];
+        Arrays.fill(list, Player.NULL);
+    }
+
+    public Board(Player[] oldList) {
+        this.list = new Player[9];
+        for (int i = 0; i < 9; i++) {
+            list[i] = oldList[0];
+        }
     }
 
     void clearBoard() {
-        Arrays.fill(board, Player.NULL);
+        Arrays.fill(list, Player.NULL);
     }
 
     boolean checkForWin() {
         for (int i = 0; i < 3; i++) {
-            if (board[0 + i] == board[3 + i] && board[3 + i] == board[6 + i]) {
-                if (board[0 + i] != Player.NULL) {
+            if (list[0 + i] == list[3 + i] && list[3 + i] == list[6 + i]) {
+                if (list[0 + i] != Player.NULL) {
                     return true;
                 }
             }
         }
         for (int i = 0; i < 7; i += 3) {
-            if (board[0 + i] == board[1 + i] && board[1 + i] == board[2 + i]) {
-                if (board[0 + i] != Player.NULL) {
+            if (list[0 + i] == list[1 + i] && list[1 + i] == list[2 + i]) {
+                if (list[0 + i] != Player.NULL) {
                     return true;
                 }
             }
         }
-        if (board[0] == board[4] && board[4] == board[8]) {
-            if (board[0] != Player.NULL) {
+        if (list[0] == list[4] && list[4] == list[8]) {
+            if (list[0] != Player.NULL) {
                 return true;
             }
         }
-        if (board[6] == board[4] && board[4] == board[2]) {
-            if (board[6] != Player.NULL) {
+        if (list[6] == list[4] && list[4] == list[2]) {
+            if (list[6] != Player.NULL) {
                 return true;
             }
         }
@@ -47,7 +54,7 @@ public class Board {
     }
 
     boolean checkForEve() {
-        for (Player i : board) {
+        for (Player i : list) {
             if (i == Player.NULL) {
                 return false;
             }
@@ -84,7 +91,7 @@ public class Board {
                 System.out.println("Nur Zahlen zwischen 1 und 9 eingeben");
                 continue;
             }
-            if (board[input - 1] != Player.NULL) {
+            if (list[input - 1] != Player.NULL) {
                 System.out.println("Der Platz ist schon belegt");
                 continue;
             }
@@ -98,7 +105,7 @@ public class Board {
         var index = 1;
         for (int i = 0; i < 7; i += 3) {
             for (int y = 0; y < 3; y++) {
-                var mark = PlayerToChar(board[i + y]);
+                var mark = PlayerToChar(list[i + y]);
                 if (mark == ' ') {
                     mark = (char) (index + '0'); // int to char
                 }
@@ -117,7 +124,7 @@ public class Board {
     }
 
     void insert(int pos, Player player) {
-        this.board[pos - 1] = player;
+        this.list[pos - 1] = player;
     }
 
     void insert(Player player) {

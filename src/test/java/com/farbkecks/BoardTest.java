@@ -43,9 +43,9 @@ public class BoardTest {
     public void testInsert() {
         var testBoard = new Board();
         testBoard.insert(2, Player.X);
-        assertArrayEquals(getTestBoard("0X00000000"), testBoard.board);
+        assertArrayEquals(getTestBoard("0X00000000"), testBoard.list);
         testBoard.insert(1, Player.O);
-        assertArrayEquals(getTestBoard("OX00000000"), testBoard.board);
+        assertArrayEquals(getTestBoard("OX00000000"), testBoard.list);
     }
 
     /*
