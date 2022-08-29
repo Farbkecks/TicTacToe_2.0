@@ -87,12 +87,20 @@ public class Board {
     }
 
     void show() {
+        var index = 1;
         for (int i = 0; i < 7; i += 3) {
-            System.out.print(PlayerToChar(board[i]));
-            System.out.print("|");
-            System.out.print(PlayerToChar(board[i + 1]));
-            System.out.print("|");
-            System.out.print(PlayerToChar(board[i + 2]));
+            for (int y = 0; y < 3; y++) {
+                var mark = PlayerToChar(board[i + y]);
+                if (mark == ' ') {
+                    mark = (char) (index + '0');
+                }
+                index++;
+                System.out.print(mark);
+                if (y < 2) {
+                    System.out.print("|");
+                }
+
+            }
             System.out.println();
             if (i != 6) {
                 System.out.println("-----");
