@@ -10,7 +10,7 @@ enum Player {
 
 public class App {
 
-    static int getUserInputAsInt() {
+    private static int getUserInputAsInt() {
         var scanner = new Scanner(System.in);
         var input = -1;
 

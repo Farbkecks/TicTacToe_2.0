@@ -11,7 +11,7 @@ public class Board {
         Arrays.fill(board, Player.NULL);
     }
 
-    static char PlayerToChar(Player player) {
+    private static char PlayerToChar(Player player) {
         switch (player) {
             case X:
                 return 'X';
@@ -22,7 +22,7 @@ public class Board {
         }
     }
 
-    public void show() {
+    void show() {
         for (int i = 0; i < 7; i += 3) {
             System.out.print(PlayerToChar(board[i]));
             System.out.print("|");
@@ -36,7 +36,7 @@ public class Board {
         }
     }
 
-    public void insert(int pos, Player player) {
+    void insert(int pos, Player player) {
         this.board[pos - 1] = player;
     }
 
