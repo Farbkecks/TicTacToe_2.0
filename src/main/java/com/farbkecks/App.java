@@ -31,7 +31,17 @@ public class App {
         } while (true);
         scanner.close();
         return input;
+    }
 
+    private static Player changePlayer(Player player) {
+        switch (player) {
+            case X:
+                return Player.O;
+            case O:
+                return Player.X;
+            default:
+                return Player.NULL;
+        }
     }
 
     public static void main(String[] args) {
