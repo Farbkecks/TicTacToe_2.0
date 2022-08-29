@@ -46,10 +46,6 @@ public class App {
 
     public static void main(String[] args) {
         var board = new Board();
-        board.insert(2, Player.X);
-        board.insert(5, Player.X);
-        board.insert(9, Player.X);
-        board.show();
-        System.out.println(board.checkForWin());
+
     }
 }

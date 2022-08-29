@@ -29,11 +29,22 @@ public class BoardTest {
     }
 
     @Test
+    public void testEven() {
+        var board = new Board();
+        for (int i = 1; i < 9; i++) {
+            board.insert(i, Player.X);
+        }
+        assertEquals(false, board.checkForEve());
+        board.insert(9, Player.X);
+        assertTrue(board.checkForEve());
+    }
+
+    @Test
     public void testInsert() {
         var testBoard = new Board();
-        testBoard.insert(1, Player.X);
+        testBoard.insert(2, Player.X);
         assertArrayEquals(getTestBoard("0X00000000"), testBoard.board);
-        testBoard.insert(0, Player.O);
+        testBoard.insert(1, Player.O);
         assertArrayEquals(getTestBoard("OX00000000"), testBoard.board);
     }
 

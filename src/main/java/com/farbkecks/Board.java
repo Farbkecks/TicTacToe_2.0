@@ -44,6 +44,15 @@ public class Board {
         return false;
     }
 
+    boolean checkForEve() {
+        for (Player i : board) {
+            if (i == Player.NULL) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private static char PlayerToChar(Player player) {
         switch (player) {
             case X:
