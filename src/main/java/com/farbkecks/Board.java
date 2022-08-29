@@ -1,10 +1,12 @@
 package com.farbkecks;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Board {
 
     Player[] board;
+    final static Scanner scanner = new Scanner(System.in);
 
     public Board() {
         this.board = new Player[9];
@@ -64,6 +66,26 @@ public class Board {
         }
     }
 
+    private static int userInput(Player player) {
+        var input = -1;
+        do {
+            System.out.println("An welche Position soll das Zeichen? ");
+            if (scanner.hasNextInt()) {
+                input = scanner.nextInt();
+            } else {
+                System.out.println("Nur Zahlen eingeben");
+                scanner.nextLine();
+                continue;
+            }
+            if (input >= 0 && input < 9) {
+                break;
+            }
+            System.out.println("Nur Zahlen zwischen 1 und 9 eingeben");
+
+        } while (true);
+        return input;
+    }
+
     void show() {
         for (int i = 0; i < 7; i += 3) {
             System.out.print(PlayerToChar(board[i]));
@@ -80,6 +102,10 @@ public class Board {
 
     void insert(int pos, Player player) {
         this.board[pos - 1] = player;
+    }
+
+    void insert(Player player) {
+        insert(userInput(player), player);
     }
 
 }
