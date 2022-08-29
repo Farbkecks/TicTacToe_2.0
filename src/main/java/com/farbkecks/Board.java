@@ -55,7 +55,7 @@ public class Board {
         return true;
     }
 
-    private static char PlayerToChar(Player player) {
+    private char PlayerToChar(Player player) {
         switch (player) {
             case X:
                 return 'X';
@@ -66,7 +66,7 @@ public class Board {
         }
     }
 
-    private static int userInput(Player player) {
+    private int userInput(Player player) {
         var input = -1;
         do {
             System.out.println("An welche Position soll das Zeichen? ");
@@ -77,10 +77,15 @@ public class Board {
                 scanner.nextLine();
                 continue;
             }
-            if (input >= 0 && input < 9) {
-                break;
+            if (input <= 0 || input > 9) {
+                System.out.println("Nur Zahlen zwischen 1 und 9 eingeben");
+                continue;
             }
-            System.out.println("Nur Zahlen zwischen 1 und 9 eingeben");
+            if (board[input - 1] != Player.NULL) {
+                System.out.println("Der Platz ist schon belegt");
+                continue;
+            }
+            break;
 
         } while (true);
         return input;
@@ -92,7 +97,7 @@ public class Board {
             for (int y = 0; y < 3; y++) {
                 var mark = PlayerToChar(board[i + y]);
                 if (mark == ' ') {
-                    mark = (char) (index + '0');
+                    mark = (char) (index + '0'); // int to char
                 }
                 index++;
                 System.out.print(mark);
