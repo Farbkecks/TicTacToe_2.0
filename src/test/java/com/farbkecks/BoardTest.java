@@ -1,6 +1,8 @@
 package com.farbkecks;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -33,5 +35,48 @@ public class BoardTest {
         assertArrayEquals(getTestBoard("0X00000000"), testBoard.board);
         testBoard.insert(0, Player.O);
         assertArrayEquals(getTestBoard("OX00000000"), testBoard.board);
+    }
+
+    /*
+     * 1 | 2 | 3
+     * ---------
+     * 4 | 5 | 6
+     * ---------
+     * 7 | 8 | 9
+     */
+
+    @Test
+    public void testCheckWin() {
+        var board = new Board();
+        board.insert(1, Player.X);
+        board.insert(5, Player.X);
+        board.insert(9, Player.X);
+        assertTrue(board.checkForWin());
+        board.clearBoard();
+
+        board.insert(3, Player.X);
+        board.insert(5, Player.X);
+        board.insert(7, Player.X);
+        assertTrue(board.checkForWin());
+        board.clearBoard();
+
+        board.insert(1, Player.X);
+        board.insert(5, Player.X);
+        board.insert(7, Player.X);
+        assertEquals(false, board.checkForWin());
+        board.clearBoard();
+
+        board.insert(2, Player.X);
+        board.insert(5, Player.X);
+        board.insert(8, Player.X);
+        assertTrue(board.checkForWin());
+        board.clearBoard();
+
+        board.insert(7, Player.X);
+        board.insert(8, Player.X);
+        board.insert(9, Player.X);
+        assertTrue(board.checkForWin());
+        board.clearBoard();
+
     }
 }
