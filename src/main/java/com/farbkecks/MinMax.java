@@ -30,14 +30,14 @@ public class MinMax {
     static Board minmax(char[] listAbove, char player, int depth) {
         var boards = getAllBoards(listAbove, player);
         for (Board i : boards) {
-            if (i.checkForEve()) {
-                i.rating = 0;
-            } else if (i.checkForWin()) {
+            if (i.checkForWin()) {
                 if ('O' == player) {
                     i.rating = -1;
                 } else if ('X' == player) {
                     i.rating = 1;
                 }
+            } else if (i.checkForEve()) {
+                i.rating = 0;
             } else {
                 var newList = Arrays.copyOf(i.list, i.list.length);
                 var resulte = minmax(newList, App.changePlayer(player), depth + 1);

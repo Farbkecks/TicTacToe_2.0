@@ -32,7 +32,11 @@ public class App {
         }
         board.show();
         player = changePlayer(player);
-        System.out.print(player);
-        System.out.println(" hatt gewonne");
+        if (board.checkForWin()) {
+            System.out.print(player);
+            System.out.println(" hatt gewonne");
+        } else {
+            System.out.println("keiner hat Gewonnen");
+        }
     }
 }

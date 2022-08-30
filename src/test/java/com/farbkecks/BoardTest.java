@@ -73,6 +73,12 @@ public class BoardTest {
         assertTrue(board.checkForWin());
         board.clearBoard();
 
+        board.insert(3, 'X');
+        board.insert(6, 'X');
+        board.insert(9, 'X');
+        assertTrue(board.checkForWin());
+        board.clearBoard();
+
         board.insert(7, 'X');
         board.insert(8, 'X');
         board.insert(9, 'X');
