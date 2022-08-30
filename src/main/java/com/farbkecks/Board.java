@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Board {
 
     Player[] list;
+    int rating;
     final static Scanner scanner = new Scanner(System.in);
 
     public Board() {
@@ -14,10 +15,9 @@ public class Board {
     }
 
     public Board(Player[] oldList) {
-        this.list = new Player[9];
-        for (int i = 0; i < 9; i++) {
-            list[i] = oldList[0];
-        }
+        this.rating = 0;
+        var list = Arrays.copyOf(oldList, oldList.length);
+        this.list = list;
     }
 
     void clearBoard() {
@@ -101,21 +101,35 @@ public class Board {
         return input;
     }
 
-    void show() {
-        var index = 1;
-        for (int i = 0; i < 7; i += 3) {
-            for (int y = 0; y < 3; y++) {
-                var mark = PlayerToChar(list[i + y]);
-                if (mark == ' ') {
-                    mark = (char) (index + '0'); // int to char
-                }
-                index++;
-                System.out.print(mark);
-                if (y < 2) {
-                    System.out.print("|");
-                }
+    // void show() {
+    // var index = 1;
+    // for (int i = 0; i < 7; i += 3) {
+    // for (int y = 0; y < 3; y++) {
+    // var mark = PlayerToChar(list[i + y]);
+    // if (mark == ' ') {
+    // mark = (char) (index + '0'); // int to char
+    // }
+    // index++;
+    // System.out.print(mark);
+    // if (y < 2) {
+    // System.out.print("|");
+    // }
 
-            }
+    // }
+    // System.out.println();
+    // if (i != 6) {
+    // System.out.println("-----");
+    // }
+    // }
+    // }
+
+    void show() {
+        for (int i = 0; i < 7; i += 3) {
+            System.out.print(PlayerToChar(list[i]));
+            System.out.print("|");
+            System.out.print(PlayerToChar(list[i + 1]));
+            System.out.print("|");
+            System.out.print(PlayerToChar(list[i + 2]));
             System.out.println();
             if (i != 6) {
                 System.out.println("-----");

@@ -8,7 +8,7 @@ enum Player {
 
 public class App {
 
-    private static Player changePlayer(Player player) {
+    static Player changePlayer(Player player) {
         switch (player) {
             case X:
                 return Player.O;
