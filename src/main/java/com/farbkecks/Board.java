@@ -17,7 +17,8 @@ public class Board {
 
     public Board(char[] oldList) {
         this.rating = 0;
-        var list = Arrays.copyOf(oldList, oldList.length);
+        char[] list = new char[9];
+        System.arraycopy(oldList, 0, list, 0, oldList.length);
         this.list = list;
     }
 
