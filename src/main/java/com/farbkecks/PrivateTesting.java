@@ -13,10 +13,10 @@ public class PrivateTesting {
     }
 
     public static void main(String[] args) {
-        var board = new Board(getTestBoard("XOO X X O"));
+        var board = new Board(getTestBoard("X         "));
         board.show();
         System.out.println("-----------------");
-        var x = MinMax.minmax(board, 'X');
+        var x = MinMax.minmax(board.list, 'O', 1);
         x.show();
     }
 }

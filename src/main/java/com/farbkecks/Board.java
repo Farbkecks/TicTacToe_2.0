@@ -92,41 +92,41 @@ public class Board {
         return input;
     }
 
-    // void show() {
-    // var index = 1;
-    // for (int i = 0; i < 7; i += 3) {
-    // for (int y = 0; y < 3; y++) {
-    // var mark = PlayerToChar(list[i + y]);
-    // if (mark == ' ') {
-    // mark = (char) (index + '0'); // int to char
-    // }
-    // index++;
-    // System.out.print(mark);
-    // if (y < 2) {
-    // System.out.print("|");
-    // }
-
-    // }
-    // System.out.println();
-    // if (i != 6) {
-    // System.out.println("-----");
-    // }
-    // }
-    // }
-
     void show() {
+        var index = 1;
         for (int i = 0; i < 7; i += 3) {
-            System.out.print(list[i]);
-            System.out.print("|");
-            System.out.print(list[i + 1]);
-            System.out.print("|");
-            System.out.print(list[i + 2]);
+            for (int y = 0; y < 3; y++) {
+                var mark = list[i + y];
+                if (mark == ' ') {
+                    mark = (char) (index + '0'); // int to char
+                }
+                index++;
+                System.out.print(mark);
+                if (y < 2) {
+                    System.out.print("|");
+                }
+
+            }
             System.out.println();
             if (i != 6) {
                 System.out.println("-----");
             }
         }
     }
+
+    // void show() {
+    // for (int i = 0; i < 7; i += 3) {
+    // System.out.print(list[i]);
+    // System.out.print("|");
+    // System.out.print(list[i + 1]);
+    // System.out.print("|");
+    // System.out.print(list[i + 2]);
+    // System.out.println();
+    // if (i != 6) {
+    // System.out.println("-----");
+    // }
+    // }
+    // }
 
     void insert(int pos, char player) {
         this.list[pos - 1] = player;

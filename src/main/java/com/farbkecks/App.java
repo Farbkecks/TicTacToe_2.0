@@ -16,10 +16,19 @@ public class App {
     public static void main(String[] args) {
         var board = new Board();
         var player = 'X';
+        var computerPlaysNot = true;
         while (board.checkForEve() == false && board.checkForWin() == false) {
-            board.show();
-            board.insert(player);
-            player = changePlayer(player);
+            if (computerPlaysNot) {
+                board.show();
+                board.insert(player);
+                player = changePlayer(player);
+                computerPlaysNot = false;
+            } else {
+                var index = MinMax.startMinMax(board.list, player);
+                board.insert(index, player);
+                player = changePlayer(player);
+                computerPlaysNot = true;
+            }
         }
         board.show();
         player = changePlayer(player);
