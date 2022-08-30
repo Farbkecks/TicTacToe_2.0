@@ -15,12 +15,13 @@ public class App {
 
     public static void main(String[] args) {
 
-        var towPlayer = true;
+        var towPlayer = true; // change for two or one player
 
         var board = new Board();
         var player = 'X';
         var computerPlaysNot = true;
-        while (board.checkForEve() == false && board.checkForWin() == false) {
+        while (board.checkForEve() == false && board.checkForWin() == false) { // ends gameloop when even or a win
+            // gameloop if the player plays
             if (computerPlaysNot) {
                 board.show();
                 board.insert(player);
@@ -28,7 +29,7 @@ public class App {
                 if (towPlayer == false) {
                     computerPlaysNot = false;
                 }
-            } else {
+            } else { // gameloop if the pc plays
                 var index = MinMax.startMinMax(board.list, player);
                 board.insert(index, player);
                 player = changePlayer(player);
