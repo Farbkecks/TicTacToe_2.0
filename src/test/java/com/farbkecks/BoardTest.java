@@ -7,22 +7,12 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class BoardTest {
-    static Player CharToPlayer(char cha) {
-        switch (cha) {
-            case 'X':
-                return Player.X;
-            case 'O':
-                return Player.O;
-            default:
-                return Player.NULL;
-        }
-    }
 
-    static Player[] getTestBoard(String input) {
-        var testBoard = new Player[9];
+    static char[] getTestBoard(String input) {
+        var testBoard = new char[9];
         char[] charInput = input.toCharArray();
         for (int i = 0; i < testBoard.length; i++) {
-            testBoard[i] = CharToPlayer(charInput[i]);
+            testBoard[i] = charInput[i];
         }
         return testBoard;
 
@@ -32,20 +22,20 @@ public class BoardTest {
     public void testEven() {
         var board = new Board();
         for (int i = 1; i < 9; i++) {
-            board.insert(i, Player.X);
+            board.insert(i, 'X');
         }
         assertEquals(false, board.checkForEve());
-        board.insert(9, Player.X);
+        board.insert(9, 'X');
         assertTrue(board.checkForEve());
     }
 
     @Test
     public void testInsert() {
         var testBoard = new Board();
-        testBoard.insert(2, Player.X);
-        assertArrayEquals(getTestBoard("0X00000000"), testBoard.list);
-        testBoard.insert(1, Player.O);
-        assertArrayEquals(getTestBoard("OX00000000"), testBoard.list);
+        testBoard.insert(2, 'X');
+        assertArrayEquals(getTestBoard(" X       "), testBoard.list);
+        testBoard.insert(1, 'O');
+        assertArrayEquals(getTestBoard("OX       "), testBoard.list);
     }
 
     /*
@@ -59,33 +49,33 @@ public class BoardTest {
     @Test
     public void testCheckWin() {
         var board = new Board();
-        board.insert(1, Player.X);
-        board.insert(5, Player.X);
-        board.insert(9, Player.X);
+        board.insert(1, 'X');
+        board.insert(5, 'X');
+        board.insert(9, 'X');
         assertTrue(board.checkForWin());
         board.clearBoard();
 
-        board.insert(3, Player.X);
-        board.insert(5, Player.X);
-        board.insert(7, Player.X);
+        board.insert(3, 'X');
+        board.insert(5, 'X');
+        board.insert(7, 'X');
         assertTrue(board.checkForWin());
         board.clearBoard();
 
-        board.insert(1, Player.X);
-        board.insert(5, Player.X);
-        board.insert(7, Player.X);
+        board.insert(1, 'X');
+        board.insert(5, 'X');
+        board.insert(7, 'X');
         assertEquals(false, board.checkForWin());
         board.clearBoard();
 
-        board.insert(2, Player.X);
-        board.insert(5, Player.X);
-        board.insert(8, Player.X);
+        board.insert(2, 'X');
+        board.insert(5, 'X');
+        board.insert(8, 'X');
         assertTrue(board.checkForWin());
         board.clearBoard();
 
-        board.insert(7, Player.X);
-        board.insert(8, Player.X);
-        board.insert(9, Player.X);
+        board.insert(7, 'X');
+        board.insert(8, 'X');
+        board.insert(9, 'X');
         assertTrue(board.checkForWin());
         board.clearBoard();
 

@@ -1,27 +1,21 @@
 package com.farbkecks;
 
-enum Player {
-    X,
-    O,
-    NULL
-}
-
 public class App {
 
-    static Player changePlayer(Player player) {
+    static char changePlayer(char player) {
         switch (player) {
-            case X:
-                return Player.O;
-            case O:
-                return Player.X;
+            case 'X':
+                return 'O';
+            case 'O':
+                return 'X';
             default:
-                return Player.NULL;
+                return ' ';
         }
     }
 
     public static void main(String[] args) {
         var board = new Board();
-        var player = Player.X;
+        var player = 'X';
         while (board.checkForEve() == false && board.checkForWin() == false) {
             board.show();
             board.insert(player);

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class MinMax {
 
-    static ArrayList<Board> getAllBoards(Board boardAbove, Player player) {
+    static ArrayList<Board> getAllBoards(Board boardAbove, char player) {
         var boards = new ArrayList<Board>();
         for (int i = 0; i < 9; i++) {
-            if (boardAbove.list[i] == Player.NULL) {
+            if (boardAbove.list[i] == ' ') {
                 var newBoard = new Board(boardAbove.list);
                 newBoard.list[i] = player;
                 boards.add(newBoard);
@@ -16,15 +16,15 @@ public class MinMax {
         return boards;
     }
 
-    static Board minmax(Board boardAbove, Player player) {
+    static Board minmax(Board boardAbove, char player) {
         var boards = getAllBoards(boardAbove, player);
         for (Board i : boards) {
             if (i.checkForEve()) {
                 i.rating = 0;
             } else if (i.checkForWin()) {
-                if (Player.O == player) {
+                if ('O' == player) {
                     i.rating = -1;
-                } else if (Player.X == player) {
+                } else if ('X' == player) {
                     i.rating = 1;
                 }
             } else {
@@ -34,10 +34,10 @@ public class MinMax {
         }
         int index = 0;
         int direction = 1;
-        if (player == Player.X) {
+        if (player == 'X') {
             direction = 1;
         }
-        if (player == Player.O) {
+        if (player == 'O') {
             direction = -1;
         }
         int highst = boards.get(0).rating * direction;
