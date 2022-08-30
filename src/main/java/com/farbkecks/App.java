@@ -1,35 +1,48 @@
 package com.farbkecks;
 
-enum Player {
-    X,
-    O,
-    NULL
-}
-
 public class App {
 
-    private static Player changePlayer(Player player) {
+    static char changePlayer(char player) {
         switch (player) {
-            case X:
-                return Player.O;
-            case O:
-                return Player.X;
+            case 'X':
+                return 'O';
+            case 'O':
+                return 'X';
             default:
-                return Player.NULL;
+                return ' ';
         }
     }
 
     public static void main(String[] args) {
+
+        var towPlayer = true; // change for two or one player
+
         var board = new Board();
-        var player = Player.X;
-        while (board.checkForEve() == false && board.checkForWin() == false) {
-            board.show();
-            board.insert(player);
-            player = changePlayer(player);
+        var player = 'X';
+        var computerPlaysNot = true;
+        while (board.checkForEve() == false && board.checkForWin() == false) { // ends gameloop when even or a win
+            // gameloop if the player plays
+            if (computerPlaysNot) {
+                board.show();
+                board.insert(player);
+                player = changePlayer(player);
+                if (towPlayer == false) {
+                    computerPlaysNot = false;
+                }
+            } else { // gameloop if the pc plays
+                var index = MinMax.startMinMax(board.list, player);
+                board.insert(index, player);
+                player = changePlayer(player);
+                computerPlaysNot = true;
+            }
         }
         board.show();
         player = changePlayer(player);
-        System.out.print(player);
-        System.out.println(" hatt gewonne");
+        if (board.checkForWin()) {
+            System.out.print(player);
+            System.out.println(" hatt gewonne");
+        } else {
+            System.out.println("keiner hat Gewonnen");
+        }
     }
 }

@@ -5,40 +5,57 @@ import java.util.Scanner;
 
 public class Board {
 
-    Player[] board;
+    /*
+     * the board is saved in an 9 char array
+     * there are only 'X', 'O', ' '
+     */
+    char[] list;
+    int rating; // rates the board in dem MinMax algorithm
     final static Scanner scanner = new Scanner(System.in);
 
+    // rating is not decelerate because this constructor is not used in the MinMax
+    // method's
     public Board() {
-        this.board = new Player[9];
-        Arrays.fill(board, Player.NULL);
+        this.list = new char[9];
+        Arrays.fill(list, ' ');
+    }
+
+    public Board(char[] oldList) {
+        this.rating = 0;
+        char[] list = new char[9];
+        System.arraycopy(oldList, 0, list, 0, oldList.length); // to get a deep copy of the list
+        this.list = list;
     }
 
     void clearBoard() {
-        Arrays.fill(board, Player.NULL);
+        Arrays.fill(list, ' '); // only used for testing
     }
 
     boolean checkForWin() {
-        for (int i = 0; i < 3; i++) {
-            if (board[0 + i] == board[3 + i] && board[3 + i] == board[6 + i]) {
-                if (board[0 + i] != Player.NULL) {
+        for (int i = 0; i < 3; i++) { // tests the 3 vertical lines
+            if (list[0 + i] == list[3 + i] && list[3 + i] == list[6 + i]) {// tests if the symbols on the line are the
+                                                                           // same
+                if (list[0 + i] != ' ') {// tests if the lines is not only empty
                     return true;
                 }
             }
         }
-        for (int i = 0; i < 7; i += 3) {
-            if (board[0 + i] == board[1 + i] && board[1 + i] == board[2 + i]) {
-                if (board[0 + i] != Player.NULL) {
+        for (int i = 0; i < 7; i += 3) { // tests the 3 horizontal lines
+            if (list[0 + i] == list[1 + i] && list[1 + i] == list[2 + i]) {
+                if (list[0 + i] != ' ') {
                     return true;
                 }
             }
         }
-        if (board[0] == board[4] && board[4] == board[8]) {
-            if (board[0] != Player.NULL) {
+
+        // tests the not straight lines
+        if (list[0] == list[4] && list[4] == list[8]) {
+            if (list[0] != ' ') {
                 return true;
             }
         }
-        if (board[6] == board[4] && board[4] == board[2]) {
-            if (board[6] != Player.NULL) {
+        if (list[6] == list[4] && list[4] == list[2]) {
+            if (list[6] != ' ') {
                 return true;
             }
         }
@@ -47,44 +64,33 @@ public class Board {
     }
 
     boolean checkForEve() {
-        for (Player i : board) {
-            if (i == Player.NULL) {
+        for (char i : list) {
+            if (i == ' ') {
                 return false;
             }
         }
         return true;
     }
 
-    private char PlayerToChar(Player player) {
-        switch (player) {
-            case X:
-                return 'X';
-            case O:
-                return 'O';
-            default:
-                return ' ';
-        }
-    }
-
-    private int userInput(Player player) {
+    private int userInput(char player) {
         var input = -1;
         do {
             System.out.print("Spieler ");
             System.out.print(player);
             System.out.println(" ist dran");
             System.out.println("An welche Position soll das Zeichen? ");
-            if (scanner.hasNextInt()) {
+            if (scanner.hasNextInt()) { // scannes if it is an int
                 input = scanner.nextInt();
             } else {
-                System.out.println("Nur Zahlen eingeben");
+                System.out.println("Nur Zahlen eingeben"); // return if it check fails
                 scanner.nextLine();
                 continue;
             }
-            if (input <= 0 || input > 9) {
+            if (input <= 0 || input > 9) { // checks if the int is on the board
                 System.out.println("Nur Zahlen zwischen 1 und 9 eingeben");
                 continue;
             }
-            if (board[input - 1] != Player.NULL) {
+            if (list[input - 1] == 'X' || list[input - 1] == 'O') { // checks if the place is free
                 System.out.println("Der Platz ist schon belegt");
                 continue;
             }
@@ -95,32 +101,32 @@ public class Board {
     }
 
     void show() {
-        var index = 1;
-        for (int i = 0; i < 7; i += 3) {
-            for (int y = 0; y < 3; y++) {
-                var mark = PlayerToChar(board[i + y]);
-                if (mark == ' ') {
+        var index = 1; // for printing the numbers on the board
+        for (int i = 0; i < 7; i += 3) { // the loob that goes horizontal
+            for (int y = 0; y < 3; y++) { // the vertical loop
+                var mark = list[i + y]; // get the char on this position
+                if (mark == ' ') { // changes the char to the index if blank
                     mark = (char) (index + '0'); // int to char
                 }
                 index++;
                 System.out.print(mark);
-                if (y < 2) {
+                if (y < 2) { // puts the line only between the numbers
                     System.out.print("|");
                 }
 
             }
             System.out.println();
-            if (i != 6) {
+            if (i != 6) { // puts the line only between the rows
                 System.out.println("-----");
             }
         }
     }
 
-    void insert(int pos, Player player) {
-        this.board[pos - 1] = player;
+    void insert(int pos, char player) {
+        this.list[pos - 1] = player;
     }
 
-    void insert(Player player) {
+    void insert(char player) {
         insert(userInput(player), player);
     }
 
