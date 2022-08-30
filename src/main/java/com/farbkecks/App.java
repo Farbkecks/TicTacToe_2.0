@@ -14,6 +14,9 @@ public class App {
     }
 
     public static void main(String[] args) {
+
+        var towPlayer = true;
+
         var board = new Board();
         var player = 'X';
         var computerPlaysNot = true;
@@ -22,7 +25,9 @@ public class App {
                 board.show();
                 board.insert(player);
                 player = changePlayer(player);
-                computerPlaysNot = false;
+                if (towPlayer == false) {
+                    computerPlaysNot = false;
+                }
             } else {
                 var index = MinMax.startMinMax(board.list, player);
                 board.insert(index, player);
