@@ -14,10 +14,10 @@ public class PrivateTesting {
 
     // testing the MinMax function
     public static void main(String[] args) {
-        var board = new Board(getTestBoardFromString("XOXOOX X "));
+        var board = new Board(getTestBoardFromString("XOXOOX X "), true);
         board.show();
         System.out.println("-----------------");
-        var x = MinMax.minmax(board.list, 'O', 1);
+        var x = MinMax.minmax(board.list, 'O', 1, true);
         x.show();
     }
 }
