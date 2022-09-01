@@ -20,7 +20,7 @@ public class BoardTest {
 
     @Test
     public void testEven() {
-        var board = new Board();
+        var board = new Board(true);
         for (int i = 1; i < 9; i++) {
             board.insert(i, 'X');
         }
@@ -31,7 +31,7 @@ public class BoardTest {
 
     @Test
     public void testInsert() {
-        var testBoard = new Board();
+        var testBoard = new Board(true);
         testBoard.insert(2, 'X');
         assertArrayEquals(getTestBoard(" X       "), testBoard.list);
         testBoard.insert(1, 'O');
@@ -48,7 +48,7 @@ public class BoardTest {
 
     @Test
     public void testCheckWin() {
-        var board = new Board();
+        var board = new Board(true);
         board.insert(1, 'X');
         board.insert(5, 'X');
         board.insert(9, 'X');

@@ -5,23 +5,29 @@ import java.util.Scanner;
 
 public class Board {
 
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_BLUE = "\u001B[34m";
     /*
      * the board is saved in an 9 char array
      * there are only 'X', 'O', ' '
      */
     char[] list;
     int rating; // rates the board in dem MinMax algorithm
+    boolean color;
     final static Scanner scanner = new Scanner(System.in);
 
     // rating is not decelerate because this constructor is not used in the MinMax
     // method's
-    public Board() {
+    public Board(boolean color) {
+        this.color = color;
         this.list = new char[9];
         Arrays.fill(list, ' ');
     }
 
-    public Board(char[] oldList) {
+    public Board(char[] oldList, boolean color) {
         this.rating = 0;
+        this.color = color;
         char[] list = new char[9];
         System.arraycopy(oldList, 0, list, 0, oldList.length); // to get a deep copy of the list
         this.list = list;
@@ -76,7 +82,12 @@ public class Board {
         var input = -1;
         do {
             System.out.print("Spieler ");
-            System.out.print(player);
+            if (player == 'X') {
+                System.out.print(ANSI_RED + player + ANSI_RESET);
+            }
+            if (player == 'O') {
+                System.out.print(ANSI_BLUE + player + ANSI_RESET);
+            }
             System.out.println(" ist dran");
             System.out.println("An welche Position soll das Zeichen? ");
             if (scanner.hasNextInt()) { // scannes if it is an int
@@ -109,7 +120,13 @@ public class Board {
                     mark = (char) (index + '0'); // int to char
                 }
                 index++;
-                System.out.print(mark);
+                if (mark == 'X') {
+                    System.out.print(ANSI_RED + mark + ANSI_RESET);
+                } else if (mark == 'O') {
+                    System.out.print(ANSI_BLUE + mark + ANSI_RESET);
+                } else {
+                    System.out.print(mark);
+                }
                 if (y < 2) { // puts the line only between the numbers
                     System.out.print("|");
                 }

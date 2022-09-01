@@ -15,9 +15,11 @@ public class App {
 
     public static void main(String[] args) {
 
-        var towPlayer = true; // change for two or one player
+        var towPlayer = false; // change for two or one player
+        var color = true; // show board with color
+        // doesn't work with some terminals
 
-        var board = new Board();
+        var board = new Board(color);
         var player = 'X';
         var computerPlaysNot = true;
         while (board.checkForEve() == false && board.checkForWin() == false) { // ends gameloop when even or a win
@@ -30,7 +32,7 @@ public class App {
                     computerPlaysNot = false;
                 }
             } else { // gameloop if the pc plays
-                var index = MinMax.startMinMax(board.list, player);
+                var index = MinMax.startMinMax(board.list, player, color);
                 board.insert(index, player);
                 player = changePlayer(player);
                 computerPlaysNot = true;
