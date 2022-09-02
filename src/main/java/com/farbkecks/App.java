@@ -14,10 +14,21 @@ public class App {
     }
 
     public static void main(String[] args) {
-
         var towPlayer = false; // change for two or one player
         var color = true; // show board with color
         // doesn't work with some terminals
+
+        for (String i : args) {
+            if (i.equals("color")) {
+                color = false;
+            } else if (i.equals("two")) {
+                towPlayer = true;
+            } else {
+                System.out.println("color - disables the color on the board");
+                System.out.println("tow - enables the input from two players");
+                System.out.println();
+            }
+        }
 
         var board = new Board(color);
         var player = 'X';

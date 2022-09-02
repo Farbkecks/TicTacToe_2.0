@@ -82,11 +82,18 @@ public class Board {
         var input = -1;
         do {
             System.out.print("Spieler ");
-            if (player == 'X') {
-                System.out.print(ANSI_RED + player + ANSI_RESET);
-            }
-            if (player == 'O') {
-                System.out.print(ANSI_BLUE + player + ANSI_RESET);
+            if (color) {
+                if (player == 'X') {
+                    System.out.print(ANSI_RED + player + ANSI_RESET);
+                } else if (player == 'O') {
+                    System.out.print(ANSI_BLUE + player + ANSI_RESET);
+                }
+            } else {
+                if (player == 'X') {
+                    System.out.print(player);
+                } else if (player == 'O') {
+                    System.out.print(player);
+                }
             }
             System.out.println(" ist dran");
             System.out.println("An welche Position soll das Zeichen? ");
@@ -120,12 +127,23 @@ public class Board {
                     mark = (char) (index + '0'); // int to char
                 }
                 index++;
-                if (mark == 'X') {
-                    System.out.print(ANSI_RED + mark + ANSI_RESET);
-                } else if (mark == 'O') {
-                    System.out.print(ANSI_BLUE + mark + ANSI_RESET);
+                if (color) {
+                    if (mark == 'X') {
+                        System.out.print(ANSI_RED + mark + ANSI_RESET);
+                    } else if (mark == 'O') {
+                        System.out.print(ANSI_BLUE + mark + ANSI_RESET);
+                    } else {
+                        System.out.print(mark);
+                    }
                 } else {
-                    System.out.print(mark);
+                    if (mark == 'X') {
+                        System.out.print(mark);
+                    } else if (mark == 'O') {
+                        System.out.print(mark);
+                    } else {
+                        System.out.print(mark);
+                    }
+
                 }
                 if (y < 2) { // puts the line only between the numbers
                     System.out.print("|");
