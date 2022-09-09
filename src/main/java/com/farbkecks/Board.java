@@ -8,26 +8,37 @@ public class Board {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_BLACK = "\u001B[30m";
     /*
      * the board is saved in an 9 char array
      * there are only 'X', 'O', ' '
      */
     char[] list;
     int rating; // rates the board in dem MinMax algorithm
-    boolean color;
+    String color1, color2;
     final static Scanner scanner = new Scanner(System.in);
+
+    private void setColor(boolean color) {
+        if (color) {
+            this.color1 = ANSI_BLUE;
+            this.color2 = ANSI_RED;
+        } else {
+            this.color1 = "";
+            this.color2 = "";
+        }
+    }
 
     // rating is not decelerate because this constructor is not used in the MinMax
     // method's
     public Board(boolean color) {
-        this.color = color;
         this.list = new char[9];
         Arrays.fill(list, ' ');
+        setColor(color);
     }
 
     public Board(char[] oldList, boolean color) {
         this.rating = 0;
-        this.color = color;
+        setColor(color);
         char[] list = new char[9];
         System.arraycopy(oldList, 0, list, 0, oldList.length); // to get a deep copy of the list
         this.list = list;
@@ -82,18 +93,10 @@ public class Board {
         var input = -1;
         do {
             System.out.print("Spieler ");
-            if (color) {
-                if (player == 'X') {
-                    System.out.print(ANSI_RED + player + ANSI_RESET);
-                } else if (player == 'O') {
-                    System.out.print(ANSI_BLUE + player + ANSI_RESET);
-                }
-            } else {
-                if (player == 'X') {
-                    System.out.print(player);
-                } else if (player == 'O') {
-                    System.out.print(player);
-                }
+            if (player == 'X') {
+                System.out.print(color2 + player + ANSI_RESET);
+            } else if (player == 'O') {
+                System.out.print(color1 + player + ANSI_RESET);
             }
             System.out.println(" ist dran");
             System.out.println("An welche Position soll das Zeichen? ");
@@ -127,24 +130,14 @@ public class Board {
                     mark = (char) (index + '0'); // int to char
                 }
                 index++;
-                if (color) {
-                    if (mark == 'X') {
-                        System.out.print(ANSI_RED + mark + ANSI_RESET);
-                    } else if (mark == 'O') {
-                        System.out.print(ANSI_BLUE + mark + ANSI_RESET);
-                    } else {
-                        System.out.print(mark);
-                    }
+                if (mark == 'X') {
+                    System.out.print(color2 + mark + ANSI_RESET);
+                } else if (mark == 'O') {
+                    System.out.print(color1 + mark + ANSI_RESET);
                 } else {
-                    if (mark == 'X') {
-                        System.out.print(mark);
-                    } else if (mark == 'O') {
-                        System.out.print(mark);
-                    } else {
-                        System.out.print(mark);
-                    }
-
+                    System.out.print(mark);
                 }
+
                 if (y < 2) { // puts the line only between the numbers
                     System.out.print("|");
                 }
@@ -155,6 +148,7 @@ public class Board {
                 System.out.println("-----");
             }
         }
+
     }
 
     void insert(int pos, char player) {

@@ -52,8 +52,7 @@ public class App {
         board.show();
         player = changePlayer(player);
         if (board.checkForWin()) {
-            System.out.print(player);
-            System.out.println(" hatt gewonne");
+            System.out.println(player + " hatt gewonne");
         } else {
             System.out.println("keiner hat Gewonnen");
         }
