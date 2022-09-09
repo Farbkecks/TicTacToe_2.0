@@ -28,8 +28,6 @@ public class Board {
         }
     }
 
-    // rating is not decelerate because this constructor is not used in the MinMax
-    // method's
     public Board(boolean color) {
         this.list = new char[9];
         Arrays.fill(list, ' ');
@@ -37,7 +35,6 @@ public class Board {
     }
 
     public Board(char[] oldList, boolean color) {
-        this.rating = 0;
         setColor(color);
         char[] list = new char[9];
         System.arraycopy(oldList, 0, list, 0, oldList.length); // to get a deep copy of the list
@@ -90,7 +87,7 @@ public class Board {
     }
 
     private int userInput(char player) {
-        var input = -1;
+        int input;
         do {
             System.out.print("Spieler ");
             if (player == 'X') {
@@ -99,6 +96,7 @@ public class Board {
                 System.out.print(color1 + player + ANSI_RESET);
             }
             System.out.println(" ist dran");
+
             System.out.println("An welche Position soll das Zeichen? ");
             if (scanner.hasNextInt()) { // scannes if it is an int
                 input = scanner.nextInt();

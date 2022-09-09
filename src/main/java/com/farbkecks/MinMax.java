@@ -33,7 +33,7 @@ public class MinMax {
     static Board minmax(char[] listAbove, char player, int depth) {
         var boards = getAllBoards(listAbove, player);
 
-        // rats the board if win or even and if it es better for x
+        // rats the boards if win or even and if it es better for x
         for (Board i : boards) {
             if (i.checkForWin()) {
                 if ('O' == player) {
