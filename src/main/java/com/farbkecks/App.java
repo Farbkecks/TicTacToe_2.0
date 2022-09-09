@@ -56,6 +56,7 @@ public class App {
                 System.out.println("color - disables the color on the board");
                 System.out.println("two - enables the input from two players");
                 System.out.println();
+                break;
             }
         }
 
