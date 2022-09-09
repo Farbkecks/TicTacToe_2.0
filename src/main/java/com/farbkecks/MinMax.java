@@ -6,11 +6,11 @@ import java.util.Arrays;
 public class MinMax {
 
     // generats every board that is with the next move possible
-    static ArrayList<Board> getAllBoards(char[] listAbove, char player, boolean color) {
+    static ArrayList<Board> getAllBoards(char[] listAbove, char player) {
         var boards = new ArrayList<Board>();
         for (int i = 0; i < 9; i++) {
             if (listAbove[i] == ' ') {
-                var newBoard = new Board(listAbove, color);
+                var newBoard = new Board(listAbove, false);
                 newBoard.list[i] = player;
                 boards.add(newBoard);
             }
@@ -19,8 +19,8 @@ public class MinMax {
     }
 
     // starts the minmax function and converts the board to an index
-    static int startMinMax(char[] list, char player, boolean color) {
-        var board = minmax(list, player, 0, color);
+    static int startMinMax(char[] list, char player) {
+        var board = minmax(list, player, 0);
         for (int i = 0; i < list.length; i++) {
             if (list[i] != board.list[i]) {
                 return i + 1;
@@ -30,8 +30,8 @@ public class MinMax {
     }
 
     // depth is only for debugging reasons
-    static Board minmax(char[] listAbove, char player, int depth, boolean color) {
-        var boards = getAllBoards(listAbove, player, color);
+    static Board minmax(char[] listAbove, char player, int depth) {
+        var boards = getAllBoards(listAbove, player);
 
         // rats the board if win or even and if it es better for x
         for (Board i : boards) {
@@ -48,7 +48,7 @@ public class MinMax {
                 // runs minmax with the board to get all boards that are possible from this
                 // point on
                 var newList = Arrays.copyOf(i.list, i.list.length);
-                var resulted = minmax(newList, App.changePlayer(player), depth + 1, color);
+                var resulted = minmax(newList, App.changePlayer(player), depth + 1);
                 i.rating = resulted.rating;
             }
         }
