@@ -15,16 +15,18 @@ public class Board {
      */
     char[] list;
     int rating; // rates the board in dem MinMax algorithm
-    String color1, color2;
+    String color1, color2, colorReset;
     final static Scanner scanner = new Scanner(System.in);
 
     private void setColor(boolean color) {
         if (color) {
             this.color1 = ANSI_BLUE;
             this.color2 = ANSI_RED;
+            this.colorReset = ANSI_RESET;
         } else {
             this.color1 = "";
             this.color2 = "";
+            this.colorReset = "";
         }
     }
 
@@ -91,9 +93,9 @@ public class Board {
         do {
             System.out.print("Spieler ");
             if (player == 'X') {
-                System.out.print(color2 + player + ANSI_RESET);
+                System.out.print(color2 + player + colorReset);
             } else if (player == 'O') {
-                System.out.print(color1 + player + ANSI_RESET);
+                System.out.print(color1 + player + colorReset);
             }
             System.out.println(" ist dran");
 
@@ -129,9 +131,9 @@ public class Board {
                 }
                 index++;
                 if (mark == 'X') {
-                    System.out.print(color2 + mark + ANSI_RESET);
+                    System.out.print(color2 + mark + colorReset);
                 } else if (mark == 'O') {
-                    System.out.print(color1 + mark + ANSI_RESET);
+                    System.out.print(color1 + mark + colorReset);
                 } else {
                     System.out.print(mark);
                 }
